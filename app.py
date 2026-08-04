@@ -11,16 +11,27 @@ from langchain_community.vectorstores import FAISS
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import pdfplumber
+from pathlib import Path
+import base64
 
+LOGO_PATH = "assets/rallis_logo.png"  # place your logo file here
+PAGE_ICON = LOGO_PATH if Path(LOGO_PATH).exists() else "🌾"
 # ---------- Page Config ----------
 st.set_page_config(
     page_title="Rallis Farmer Chatbot",
-    page_icon="🌾",
+    page_icon=PAGE_ICON,
     layout="wide"
 )
 
 # ---------- UI ----------
-st.title("🌾 Rallis Farmer Chatbot")
+# ---------- UI ----------
+st.markdown(
+    f"""<div style="display:flex; align-items:center; gap:12px; margin-bottom:0.5rem;">
+    <img src="data:image/png;base64,{base64.b64encode(open(LOGO_PATH,'rb').read()).decode()}" width="56">
+    <h1 style="margin:0; padding:0;">Rallis Farmer Chatbot</h1>
+    </div>""",
+    unsafe_allow_html=True,
+)
 st.markdown("Ask any question about Rallis products — pesticides, dosage, crops, and more.")
 
 def clean_text(text):
