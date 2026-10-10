@@ -44,7 +44,7 @@ def build_chain(vectorstore, temperature=0.3, system_role="You are a helpful ass
     retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
     
     # Configure the chat model used to generate grounded responses.
-    llm = ChatGroq(model="llama-3.1-8b-instant", temperature=temperature)
+    llm = ChatGroq(model="openai/gpt-oss-20b", temperature=temperature)
 
     # Define the prompt rules that constrain answers to catalogue context.
     prompt = ChatPromptTemplate.from_template("""
