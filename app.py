@@ -25,13 +25,17 @@ st.set_page_config(
 
 # ---------- UI ----------
 # ---------- UI ----------
-st.markdown(
-    f"""<div style="display:flex; align-items:center; gap:12px; margin-bottom:0.5rem;">
-    <img src="data:image/png;base64,{base64.b64encode(open(LOGO_PATH,'rb').read()).decode()}" width="56">
-    <h1 style="margin:0; padding:0;">Rallis Farmer Chatbot</h1>
-    </div>""",
-    unsafe_allow_html=True,
-)
+if Path(LOGO_PATH).exists():
+    logo_b64 = base64.b64encode(open(LOGO_PATH, "rb").read()).decode()
+    st.markdown(
+        f"""<div style="display:flex; align-items:center; gap:12px; margin-bottom:0.5rem;">
+        <img src="data:image/png;base64,{logo_b64}" width="56">
+        <h1 style="margin:0; padding:0;">Rallis Farmer Chatbot</h1>
+        </div>""",
+        unsafe_allow_html=True,
+    )
+else:
+    st.title("🌾 Rallis Farmer Chatbot")
 st.markdown("Ask any question about Rallis products — pesticides, dosage, crops, and more.")
 
 def clean_text(text):
